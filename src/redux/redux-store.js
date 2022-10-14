@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import messagesReducer from "./messages-reducer";
 import sidebarReducer from "./sidebar-reducer"
@@ -18,6 +18,6 @@ let reducers = combineReducers({
     app: appReducer,
 }); 
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+let store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export default store;
