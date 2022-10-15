@@ -15,7 +15,7 @@ let User = ({
                     <span>
                         <div>
                             <NavLink to={'/profile/' + user.id}>
-                                <img alt='' src={user.photos.small != null ? user.photos.small : userPhoto}
+                                <img alt='' src={user.photos.small !== null ? user.photos.small : userPhoto}
                                      className={style.userPhoto}/>
                             </NavLink>
                         </div>
