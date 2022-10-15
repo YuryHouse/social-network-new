@@ -3,40 +3,37 @@ import Preloader from '../../common/preloader/preloader';
 import style from './ProfileInfo.module.css';
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = (props) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, updateStatus}) => {
+    if (!profile) {
         return <Preloader />
     }
 
     return (
         <div>
-            {/* <div className = {style.profile_wrap}>
-                    <img alt='' src='https://png.pngtree.com/thumb_back/fh260/back_our/20190620/ourmid/pngtree-fresh-natural-product-poster-background-image_146684.jpg' />
-            </div> */}
             <div className={style.descriptionBlock}>
                 <div className={style.avatar}>
-                    <img alt='' src={props.profile.photos.large} />
+                    <img alt='' src={profile.photos.large} />
                 </div>
                 <div>
-                    <div><h2>{props.profile.fullName}</h2></div>
-                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
+                    <div><h2>{profile.fullName}</h2></div>
+                    <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
                 </div>
                 <div>
                     <ul>
-                        <li>User ID: {props.profile.userId}</li>
-                        <li>Looking for new job: {props.profile.lookingForAJob} </li>
-                        <li>Job Description: {props.profile.lookingForAJobDescription}</li>
+                        <li>User ID: {profile.userId}</li>
+                        <li>Looking for new job: {profile.lookingForAJob} </li>
+                        <li>Job Description: {profile.lookingForAJobDescription}</li>
                     </ul>
                     <h4>Contact info:</h4>
                     <ul>
-                        <li>Github: {props.profile.contacts.github}</li>
-                        <li>VK: {props.profile.contacts.vk}</li>
-                        <li>Facebook: {props.profile.contacts.facebook}</li>
-                        <li>Instagram: {props.profile.contacts.instagram}</li>
-                        <li>Twitter: {props.profile.contacts.twitter}</li>
-                        <li>Website: {props.profile.contacts.website}</li>
-                        <li>Youtube: {props.profile.contacts.youtube}</li>
-                        <li>Main Link: {props.profile.contacts.mainLink}</li>
+                        <li>Github: {profile.contacts.github}</li>
+                        <li>VK: {profile.contacts.vk}</li>
+                        <li>Facebook: {profile.contacts.facebook}</li>
+                        <li>Instagram: {profile.contacts.instagram}</li>
+                        <li>Twitter: {profile.contacts.twitter}</li>
+                        <li>Website: {profile.contacts.website}</li>
+                        <li>Youtube: {profile.contacts.youtube}</li>
+                        <li>Main Link: {profile.contacts.mainLink}</li>
                     </ul>
                 </div>
             </div>

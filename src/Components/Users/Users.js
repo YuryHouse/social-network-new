@@ -11,8 +11,7 @@ let Users = ({
                  users,
                  follow,
                  unfollow,
-                 followingInProgress,
-                 ...props
+                 followingInProgress
              }) => {
     return (
         <div>
