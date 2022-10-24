@@ -11,13 +11,13 @@ let Users = ({
                  users,
                  follow,
                  unfollow,
-                 followingInProgress
+                 followingInProgress,
              }) => {
     return (
         <div>
             <Paginator currentPage={currentPage}
                        onPageChanged={onPageChanged}
-                       totalUsersCount={totalUsersCount}
+                       totalItemsCount={totalUsersCount}
                        pageSize={pageSize}
                        selectedPage={selectedPage}
             />
