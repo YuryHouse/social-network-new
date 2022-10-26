@@ -67,7 +67,7 @@ const AppContainer = compose(
     connect(mapStateToProps, {initializeApp}))(App);
 
 export const SocialNetworkApp = () => {
-    return <HashRouter basename={process.env.PUBLIC_URL}>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
