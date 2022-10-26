@@ -5,7 +5,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Set from "./Components/Set/Set";
-import {BrowserRouter, Route} from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 import UsersContainer from "./Components/Users/UsersContainer";
 import LoginPage from "./Components/Login/Login";
 import {connect, Provider} from "react-redux";
@@ -67,9 +67,9 @@ const AppContainer = compose(
     connect(mapStateToProps, {initializeApp}))(App);
 
 export const SocialNetworkApp = () => {
-    return <BrowserRouter basename={process.env.PUBLIC_URL}>
+    return <HashRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
