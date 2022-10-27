@@ -6,47 +6,70 @@ import userPhoto from '../../../assets/images/userPhoto.png'
 
 const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
     if (!profile) {
-        return <Preloader />
+        return <Preloader/>
     }
-    
+
     const onMainPhotoSelected = (e) => {
-      if(e.target.files.length) {
-          savePhoto(e.target.files[0]);
-      }
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0]);
+        }
     }
 
     return (
-        <div>
-            <div className={style.descriptionBlock}>
-                <div className={style.avatar}>
-                    <img alt='' src={profile.photos.large || userPhoto} className={style.mainPhoto}/>
-                    {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
-                </div>
-                <div>
-                    <div><h2>{profile.fullName}</h2></div>
-                    <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
-                </div>
-                <div>
-                    <ul>
-                        <li>User ID: {profile.userId}</li>
-                        <li>Looking for new job: {profile.lookingForAJob} </li>
-                        <li>Job Description: {profile.lookingForAJobDescription}</li>
-                    </ul>
-                    <h4>Contact info:</h4>
-                    <ul>
-                        <li>Github: {profile.contacts.github}</li>
-                        <li>VK: {profile.contacts.vk}</li>
-                        <li>Facebook: {profile.contacts.facebook}</li>
-                        <li>Instagram: {profile.contacts.instagram}</li>
-                        <li>Twitter: {profile.contacts.twitter}</li>
-                        <li>Website: {profile.contacts.website}</li>
-                        <li>Youtube: {profile.contacts.youtube}</li>
-                        <li>Main Link: {profile.contacts.mainLink}</li>
-                    </ul>
-                </div>
+        <div className={style.descriptionBlock}>
+            <div className={style.avatar}>
+                <img alt='' src={profile.photos.large || userPhoto} className={style.mainPhoto}/>
+                {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
+            </div>
+            <div>
+                <b>{'Status'}</b>: <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+            </div>
+            {}
+            <ProfileData profile = {profile}/>
+            <div>
+                <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+            })}
             </div>
         </div>
+    )
+}
 
+// const ProfileDataForm = () => {
+//
+// }
+
+const ProfileData = ({profile}) => {
+    return (
+        <>
+            <div>
+                <div><h2>{profile.fullName}</h2></div>
+            </div>
+            <div>
+                <div>
+                    <b>User ID</b>: {profile.userId}
+                </div>
+                <div>
+                    <b>Looking for a job</b>: {profile.lookingForAJob ? "yes" : "no"}
+                </div>
+                {profile.lookingForAJob &&
+                    <div>
+                        <b>Job description</b>: {profile.lookingForAJobDescription}
+                    </div>
+                }
+                <div>
+                    <b>About me</b>: {profile.aboutMe}
+                </div>
+            </div>
+        </>
+    )
+}
+
+const Contact = ({contactTitle, contactValue}) => {
+    return (
+        <div className={style.contact}>
+            <b>{contactTitle}</b>: {contactValue}
+        </div>
     )
 }
 
