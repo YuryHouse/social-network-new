@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Preloader from '../../common/preloader/preloader';
 import style from './ProfileInfo.module.css';
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from '../../../assets/images/userPhoto.png'
+import ProfileDataFormReduxForm from "./ProfileDataForm";
 
 const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+    const [editMode, setEditMode] = useState(false);
+
     if (!profile) {
         return <Preloader/>
     }
@@ -24,8 +27,13 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
             <div>
                 <b>{'Status'}</b>: <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>
-            {}
-            <ProfileData profile = {profile}/>
+            <hr/>
+                {editMode
+                    ? <ProfileDataFormReduxForm profile={profile}/>
+                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
+                        setEditMode(true)
+                    }}/>}
+                <ProfileData profile={profile}/>
             <div>
                 <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
                 return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
@@ -35,13 +43,13 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
     )
 }
 
-// const ProfileDataForm = () => {
-//
-// }
 
-const ProfileData = ({profile}) => {
+const ProfileData = ({profile, isOwner, goToEditMode}) => {
     return (
         <>
+            {isOwner && <div onClick={goToEditMode}>
+                <button>Edit profile info</button>
+            </div>}
             <div>
                 <div><h2>{profile.fullName}</h2></div>
             </div>
