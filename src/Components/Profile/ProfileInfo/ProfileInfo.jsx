@@ -5,7 +5,7 @@ import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from '../../../assets/images/userPhoto.png'
 import ProfileDataFormReduxForm from "./ProfileDataForm";
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
     const [editMode, setEditMode] = useState(false);
 
     if (!profile) {
@@ -16,6 +16,10 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
         if (e.target.files.length) {
             savePhoto(e.target.files[0]);
         }
+    }
+
+    const onSubmit = (formData) => {
+        saveProfile(formData);
     }
 
     return (
@@ -29,11 +33,10 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
             </div>
             <hr/>
                 {editMode
-                    ? <ProfileDataFormReduxForm profile={profile}/>
+                    ? <ProfileDataFormReduxForm profile={profile} onSubmit={onSubmit}/>
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
                         setEditMode(true)
                     }}/>}
-                <ProfileData profile={profile}/>
             <div>
                 <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
                 return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
