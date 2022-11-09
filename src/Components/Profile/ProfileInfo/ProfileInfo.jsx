@@ -18,8 +18,13 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
         }
     }
 
-    const onSubmit = (formData) => {
-        saveProfile(formData);
+    const onSubmit =(formData) => {
+        saveProfile(formData)
+            .then(
+                () => {
+                    setEditMode(false);
+                }
+            );
     }
 
     return (
@@ -33,7 +38,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
             </div>
             <hr/>
                 {editMode
-                    ? <ProfileDataFormReduxForm profile={profile} onSubmit={onSubmit}/>
+                    ? <ProfileDataFormReduxForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
                         setEditMode(true)
                     }}/>}
